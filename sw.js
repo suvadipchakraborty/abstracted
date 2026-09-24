@@ -1,4 +1,4 @@
-const V = 'abstracted-v1';
+const V = 'abstracted-v2';
 const SHELL = ['./', 'index.html', 'css/styles.css', 'js/app.js', 'js/mock-data.js',
   'manifest.webmanifest', 'assets/icon.svg', 'assets/icon-192.png', 'assets/icon-512.png'];
 
@@ -12,7 +12,7 @@ self.addEventListener('activate', e => {
 });
 self.addEventListener('fetch', e => {
   const r = e.request, u = new URL(r.url);
-  if (r.method !== 'GET') return;
+  if (r.method !== 'GET' || u.pathname.startsWith('/api/')) return;
   const ours = u.origin === location.origin;
   const fonts = /(^|\.)(fonts\.googleapis|fonts\.gstatic)\.com$/.test(u.hostname);
   if (!ours && !fonts) return; // arXiv calls are handled by the app (localStorage cache)

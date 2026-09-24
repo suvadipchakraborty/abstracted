@@ -59,7 +59,7 @@ async function grab(url) {
   finally { clearTimeout(t); }
 }
 async function loadPapers() {
-  for (const [url, label] of [[API, 'Live from arXiv'], [PROXY + encodeURIComponent(API), 'Live from arXiv (via proxy)']]) {
+  for (const [url, label] of [['/api/papers', 'Live from arXiv'], [API, 'Live from arXiv'], [PROXY + encodeURIComponent(API), 'Live from arXiv (via proxy)']]) {
     try { const papers = await grab(url); store.set('abstracted:cache', { at: Date.now(), papers }); return { papers, label }; } catch {}
   }
   const c = store.get('abstracted:cache', null);
